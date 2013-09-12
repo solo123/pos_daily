@@ -1,0 +1,37 @@
+%h1 Listing trades
+
+%table
+  %tr
+    %th Trade date
+    %th Merchant number
+    %th Agent number
+    %th Terminal number
+    %th Biz count
+    %th Amount
+    %th Commission
+    %th Actual amount
+    %th Base commission
+    %th Profit
+    %th
+    %th
+    %th
+
+  - @trades.each do |trade|
+    %tr
+      %td= trade.trade_date
+      %td= trade.merchant_number
+      %td= trade.agent_number
+      %td= trade.terminal_number
+      %td= trade.biz_count
+      %td= trade.amount
+      %td= trade.commission
+      %td= trade.actual_amount
+      %td= trade.base_commission
+      %td= trade.profit
+      %td= link_to 'Show', trade
+      %td= link_to 'Edit', edit_trade_path(trade)
+      %td= link_to 'Destroy', trade, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Trade', new_trade_path

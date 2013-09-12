@@ -1,0 +1,40 @@
+= form_for @trade do |f|
+  - if @trade.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@trade.errors.count, "error")} prohibited this trade from being saved:"
+      %ul
+        - @trade.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :trade_date
+    = f.date_select :trade_date
+  .field
+    = f.label :merchant_number
+    = f.text_field :merchant_number
+  .field
+    = f.label :agent_number
+    = f.text_field :agent_number
+  .field
+    = f.label :terminal_number
+    = f.text_field :terminal_number
+  .field
+    = f.label :biz_count
+    = f.number_field :biz_count
+  .field
+    = f.label :amount
+    = f.text_field :amount
+  .field
+    = f.label :commission
+    = f.text_field :commission
+  .field
+    = f.label :actual_amount
+    = f.text_field :actual_amount
+  .field
+    = f.label :base_commission
+    = f.text_field :base_commission
+  .field
+    = f.label :profit
+    = f.text_field :profit
+  .actions
+    = f.submit 'Save'
