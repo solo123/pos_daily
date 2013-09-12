@@ -1,40 +1,20 @@
-= form_for @trade do |f|
-  - if @trade.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@trade.errors.count, "error")} prohibited this trade from being saved:"
-      %ul
-        - @trade.errors.full_messages.each do |msg|
-          %li= msg
+.container
+  = simple_form_for @object, :html => {:class => 'well form-horizontal'}  do |f|
+    = f.error_notification
+    = f.input :trade_date
+    = f.input :merchant_number
+    = f.input :merchant_name
+    = f.input :agent_number
+    = f.input :agent_name
+    = f.input :terminal_number
+    = f.input :biz_count
+    = f.input :amount
+    = f.input :commission
+    = f.input :actual_amount
+    = f.input :base_commission
+    = f.input :profit
+    = f.input :status, :collection => [["New", 0], ['Done', 1]]
+    .form-actions
+      = f.submit "Save", :class => "btn btn-primary" 
+      = submit_tag 'Cancel', :type => :reset, :class => "btn btn-danger" 
 
-  .field
-    = f.label :trade_date
-    = f.date_select :trade_date
-  .field
-    = f.label :merchant_number
-    = f.text_field :merchant_number
-  .field
-    = f.label :agent_number
-    = f.text_field :agent_number
-  .field
-    = f.label :terminal_number
-    = f.text_field :terminal_number
-  .field
-    = f.label :biz_count
-    = f.number_field :biz_count
-  .field
-    = f.label :amount
-    = f.text_field :amount
-  .field
-    = f.label :commission
-    = f.text_field :commission
-  .field
-    = f.label :actual_amount
-    = f.text_field :actual_amount
-  .field
-    = f.label :base_commission
-    = f.text_field :base_commission
-  .field
-    = f.label :profit
-    = f.text_field :profit
-  .actions
-    = f.submit 'Save'

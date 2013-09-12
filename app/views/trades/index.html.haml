@@ -1,6 +1,7 @@
 %h1 Listing trades
 
-%table
+= will_paginate @collection
+%table.table.table-bordered.table-striped.table-hover
   %tr
     %th Trade date
     %th Merchant number
@@ -13,10 +14,8 @@
     %th Base commission
     %th Profit
     %th
-    %th
-    %th
 
-  - @trades.each do |trade|
+  - @collection.each do |trade|
     %tr
       %td= trade.trade_date
       %td= trade.merchant_number
@@ -28,10 +27,30 @@
       %td= trade.actual_amount
       %td= trade.base_commission
       %td= trade.profit
-      %td= link_to 'Show', trade
-      %td= link_to 'Edit', edit_trade_path(trade)
-      %td= link_to 'Destroy', trade, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td
+        = link_to 'Show', trade
+        |
+        = link_to 'Edit', edit_trade_path(trade)
+        |
+        = link_to 'Destroy', trade, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
+= will_paginate @collection
 %br
 
 = link_to 'New Trade', new_trade_path
+%a.btn.btn-primary.btn-lg{'data-toggle' => "modal", href: "#myModal"} Launch demo modal
+
+.modal.fade{id: "myModal", tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: "button", 'data-dismiss' => "modal",  'aria-hidden' => "true"} &times;
+        %h4.modal-title Modal title
+      .modal-body
+        = form_tag import_trades_path, remote: true do 
+          = text_area_tag 'import_text'
+          = submit_tag 
+      .modal-footer
+        %button.btn.btn-default{type: "button", 'data-dismiss' => "modal"} Close
+        %button.btn.btn-primary{type: "button"} Save changes
+
