@@ -70,10 +70,10 @@
     
     protected
       def load_collection
-        params[:search] ||= {}
-        @search = object_name.classify.constantize.search(params[:q])
+        params[:q] ||= {}
+        @q = object_name.classify.constantize.search(params[:q])
         pages = 20
-        @collection = @search.result.paginate(:page => params[:page], :per_page => pages)
+        @collection = @q.result.paginate(:page => params[:page], :per_page => pages)
       end 
       def load_object
         @object = object_name.classify.constantize.find_by_id(params[:id])

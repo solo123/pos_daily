@@ -1,5 +1,6 @@
 class TradesController < ResourcesController
   def import
+    trade_date = params[:trade_date]
     data = params[:import_text]
     lines = data.split(/\n/)
     imp_lines = 0
@@ -7,6 +8,7 @@ class TradesController < ResourcesController
       cs = line.split(/[\t\s]/)
       if cs.length>10 && cs[5].to_i > 0
         b = Trade.new
+        b.trade_date = trade_date
         b.merchant_number = cs[0]
         b.merchant_name = cs[1]
         b.agent_number = cs[2]
@@ -25,6 +27,24 @@ class TradesController < ResourcesController
     end
     flash[:notice] = "导入#{imp_lines}行数据。"
   end
+  def del
+    Trade.destroy_all(status: 0)
+  end
+  def submit
+    Trade.where(status: 0).update_all(status: 1)
+  end
+
+  protected
+    def load_collection
+      params[:q] ||= {}
+      if params[:op] == 'import'
+        @q = Trade.new_import.search(params[:q])
+      else
+        @q = Trade.published.search(params[:q])
+      end
+      pages = 20
+      @collection = @q.result.paginate(:page => params[:page], :per_page => pages)
+    end 
 
   private
     def trade_params
