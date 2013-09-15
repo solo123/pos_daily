@@ -1,9 +1,17 @@
 PosDaily::Application.routes.draw do
+  resources :merchants
+
   resources :ttts
+  resources :my_trades
 
   devise_for :users
 	root :to => 'home#index'
-  resources :users
+  resources :users do
+    post :add, :on => :collection
+    patch :del_merchant, :on => :member
+    patch :add_merchant, :on => :member
+
+  end
   resources :trades do
     collection do
       post :import

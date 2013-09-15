@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130915023447) do
+ActiveRecord::Schema.define(version: 20130915153242) do
+
+  create_table "merchants", force: true do |t|
+    t.string   "merchant_number"
+    t.string   "merchant_name"
+    t.integer  "user_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "trades", force: true do |t|
     t.date     "trade_date"

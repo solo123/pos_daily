@@ -1,0 +1,40 @@
+= form_tag(my_trades_path, method: :get) do
+  = text_field_tag :trade_date, params[:trade_date]
+  = collection_select  nil, :trade_month, @month_collection, :td, :td
+  = submit_tag
+
+%table.table.table-bordered.table-striped.table-hover
+  %tr
+    %th Trade date
+    %th Merchant number
+    %th Agent number
+    %th Terminal number
+    %th Biz count
+    %th Amount
+    %th Commission
+    %th Actual amount
+    %th Base commission
+    %th Profit
+
+  %tr
+    %td{colspan:'4'} 合计
+    %td= @collection.sum(:biz_count)
+    %td= '%.2f' % @collection.sum(:amount)
+    %td= '%.2f' % @collection.sum(:commission)
+    %td= '%.2f' % @collection.sum(:actual_amount)
+    %td= '%.2f' % @collection.sum(:base_commission)
+    %td= '%.2f' % @collection.sum(:profit)
+
+  - @collection.each do |trade|
+    %tr
+      %td= trade.trade_date
+      %td= trade.merchant_number
+      %td= trade.agent_number
+      %td= trade.terminal_number
+      %td= trade.biz_count
+      %td= '%.2f' % trade.amount
+      %td= '%.2f' % trade.commission
+      %td= '%.2f' % trade.actual_amount
+      %td= '%.2f' % trade.base_commission
+      %td= '%.2f' % trade.profit
+

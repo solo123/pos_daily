@@ -1,0 +1,13 @@
+.container#merchants
+  .well
+    %ul
+      - user.merchants.each do |m|
+        %li
+          = link_to "#{m.merchant_number} #{m.merchant_name}", del_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
+
+  .well
+    %ul
+      - Merchant.free_merchants.each do |m|
+        %li
+          = link_to "#{m.merchant_number} #{m.merchant_name}", add_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
+

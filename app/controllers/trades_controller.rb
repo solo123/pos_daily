@@ -23,6 +23,7 @@ class TradesController < ResourcesController
         b.status = 0
         imp_lines += 1
         b.save
+
       end
     end
     flash[:notice] = "导入#{imp_lines}行数据。"
@@ -31,6 +32,12 @@ class TradesController < ResourcesController
     Trade.destroy_all(status: 0)
   end
   def submit
+    Trade.new_import.each do |t|
+      Merchant.find_or_create_by(merchant_number: t.merchant_number) do |m|
+        m.merchant_name = t.merchant_name
+        m.status = 1
+      end
+    end
     Trade.where(status: 0).update_all(status: 1)
   end
 

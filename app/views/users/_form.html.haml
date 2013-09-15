@@ -16,3 +16,5 @@
     .form-actions
       = f.submit "Save", :class => "btn btn-primary" 
       = submit_tag 'Cancel', :type => :reset, :class => "btn btn-danger" 
+
+= render partial: 'merchants', locals: {user: @object}
