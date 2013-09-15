@@ -1,0 +1,12 @@
+%ul
+  %li= link_to '交易数据', trades_path
+  %li= link_to '用户列表', users_path
+
+.login-indicator
+  - if current_user
+    欢迎 #{current_user.username}! | 
+    = link_to '退出登录', destroy_user_session_path, method: 'delete'
+  - else
+    请登录！
+    
+

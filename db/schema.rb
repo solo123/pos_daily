@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130912142340) do
+ActiveRecord::Schema.define(version: 20130915023447) do
 
   create_table "trades", force: true do |t|
     t.date     "trade_date"
@@ -31,9 +31,17 @@ ActiveRecord::Schema.define(version: 20130912142340) do
     t.datetime "updated_at"
   end
 
+  create_table "ttts", force: true do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "username",               default: "", null: false
+    t.string   "roles",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"

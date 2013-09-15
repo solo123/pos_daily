@@ -32,15 +32,18 @@
       if @object.changed_for_autosave?
         #@changes = @object.all_changes
         if @object.save
+          respond_to do |format|
+           format.html { redirect_to :action => :show }
+           format.json { render json: @object } # avoid this output
+           format.js
+          end
         else
           flash[:error] = @object.errors.full_messages.to_sentence
           @no_log = 1
+          respond_to do |format|
+            format.html { redirect_to action: :edit }
+          end
         end
-      end
-      respond_to do |format|
-       format.html { redirect_to :action => :show }
-       format.json { render json: @object } # avoid this output
-       format.js
       end
     end
     def create

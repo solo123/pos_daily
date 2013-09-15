@@ -12,6 +12,6 @@
     %script{src: "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
     = csrf_meta_tags
   %body
-    %p.notice= notice
-    %p.alert= alert
+    = render 'shared/main_menu'
+    = bootstrap_flash
     = yield
