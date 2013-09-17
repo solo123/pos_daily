@@ -44,7 +44,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-#gem 'therubyracer'
+gem 'therubyracer'
 gem 'haml-rails'
 gem 'ransack'
 gem 'will_paginate', '~> 3.0'

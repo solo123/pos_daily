@@ -1,7 +1,8 @@
-= form_tag(my_trades_path, method: :get) do
-  = text_field_tag :trade_date, params[:trade_date]
-  = collection_select  nil, :trade_month, @month_collection, :td, :td
-  = submit_tag
+- if @month_collection
+  = form_tag(my_trades_path, method: :get) do
+    = text_field_tag :trade_date, params[:trade_date]
+    = collection_select  nil, :trade_month, @month_collection, :td, :td
+    = submit_tag
 
 %table.table.table-bordered.table-striped.table-hover
   %tr
