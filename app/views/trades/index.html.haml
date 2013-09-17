@@ -1,67 +1,72 @@
-- if params[:op] == 'import'
-  = link_to '正式数据', trades_path
-  = link_to '清空数据', del_trades_path, remote: true
-  = link_to '提交数据', submit_trades_path, confirm: '数据提交后将不能修改，并会被客户查询到。', remote: true
-- else
-  = link_to '导入数据', trades_path(op: 'import')
-  = search_form_for @q do |f|
-    = f.text_field :trade_date_eq
-    = f.text_field :merchant_number_cont
-    = f.submit
+.container
+  - if params[:op] == 'import'
+    .btn-group
+      = link_to '正式数据', trades_path, class: "btn btn-default"
+      = link_to '清空数据', del_trades_path, remote: true, class: "btn btn-default"
+      = link_to '提交数据', submit_trades_path, confirm: '数据提交后将不能修改，并会被客户查询到。', remote: true, class: "btn btn-default"
+      %a.btn.btn-primary{'data-toggle' => "modal", href: "#myModal"} 导入终端交易数据
+  - else
+    = search_form_for @q ,html: {class: "form-inline"} do |f|
+      = link_to '导入数据', trades_path(op: 'import'), class: "btn btn-default"
+      .form-group
+        = f.text_field :trade_date_eq, placeholder: "日期", class: "form-control"
+      .form-group
+        = f.text_field :merchant_number_cont, placeholder: "商户编号", class: "form-control"
+      = f.submit 'Search', class: "btn btn-primary"
 
-= will_paginate @collection
-%table.table.table-bordered.table-striped.table-hover
-  %tr
-    %th Trade date
-    %th Merchant number
-    %th Agent number
-    %th Terminal number
-    %th Biz count
-    %th Amount
-    %th Commission
-    %th Actual amount
-    %th Base commission
-    %th Profit
 
-  %tr
-    %td{colspan:'4'} 合计
-    %td= @collection.sum(:biz_count)
-    %td= '%.2f' % @collection.sum(:amount)
-    %td= '%.2f' % @collection.sum(:commission)
-    %td= '%.2f' % @collection.sum(:actual_amount)
-    %td= '%.2f' % @collection.sum(:base_commission)
-    %td= '%.2f' % @collection.sum(:profit)
 
-  - @collection.each do |trade|
+  = will_paginate @collection
+  %table.table.table-bordered.table-striped.table-hover
     %tr
-      %td= trade.trade_date
-      %td= trade.merchant_number
-      %td= trade.agent_number
-      %td= trade.terminal_number
-      %td= trade.biz_count
-      %td= '%.2f' % trade.amount
-      %td= '%.2f' % trade.commission
-      %td= '%.2f' % trade.actual_amount
-      %td= '%.2f' % trade.base_commission
-      %td= '%.2f' % trade.profit
-= will_paginate @collection
-%br
+      %th 交易日期
+      %th 商户号 
+      %th 商户名称
+      %th 终端号
+      %th 交易笔数
+      %th 交易金额
+      %th 交易手续费
+      %th 实收金额
+      %th 基准手续费
+      %th 利润
+    %tr.success
+      %td{colspan:'4'} 合计
+      %td= @collection.sum(:biz_count)
+      %td= '%.2f' % @collection.sum(:amount)
+      %td= '%.2f' % @collection.sum(:commission)
+      %td= '%.2f' % @collection.sum(:actual_amount)
+      %td= '%.2f' % @collection.sum(:base_commission)
+      %td= '%.2f' % @collection.sum(:profit)
 
-%a.btn.btn-primary.btn-lg{'data-toggle' => "modal", href: "#myModal"} 导入终端交易数据
-.modal.fade{id: "myModal", tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button.close{type: "button", 'data-dismiss' => "modal",  'aria-hidden' => "true"} &times;
-        %h4.modal-title 导入终端交易数据
-      .modal-body
-        = form_tag import_trades_path, remote: true do 
-          .form-group
-            = text_field_tag 'trade_date', Date.today, class: 'form-control', placeholder: '交易日期'
-          .form-group
-            = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴交易数据到这里'
-          = submit_tag 
-      .modal-footer
-        %button.btn.btn-default{type: "button", 'data-dismiss' => "modal"} Close
-        %button.btn.btn-primary{type: "button"} Save changes
+    - @collection.each do |trade|
+      %tr
+        %td= trade.trade_date
+        %td= trade.merchant_number
+        %td= trade.merchant_name
+        %td= trade.terminal_number
+        %td= trade.biz_count
+        %td= '%.2f' % trade.amount
+        %td= '%.2f' % trade.commission
+        %td= '%.2f' % trade.actual_amount
+        %td= '%.2f' % trade.base_commission
+        %td= '%.2f' % trade.profit
+  = will_paginate @collection
+  %br
+  
+  .modal.fade{id: "myModal", tabindex: "-1", role: "dialog", 'aria-labelledby' => "myModalLabel", 'aria-hidden' => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{type: "button", 'data-dismiss' => "modal",  'aria-hidden' => "true"} &times;
+          %h4.modal-title 导入终端交易数据
+        .modal-body
+          = form_tag import_trades_path, remote: true do 
+            .form-group
+              = text_field_tag 'trade_date', Date.today, class: 'form-control', placeholder: '交易日期'
+            .form-group
+              = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴交易数据到这里'
+            = submit_tag 
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss' => "modal"} Close
+          %button.btn.btn-primary{type: "button"} Save changes
 
