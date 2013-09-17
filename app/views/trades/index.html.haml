@@ -68,8 +68,7 @@
             .form-group
               = text_field_tag 'trade_date', Date.today, class: 'form-control', placeholder: '交易日期'
             .form-group
-              = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴交易数据到这里'
-            = submit_tag 
+              = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴交易数据到这里', :rows => 10
         .modal-footer
           %button.btn.btn-default{type: "button", 'data-dismiss' => "modal"} 放弃修改
           %button.btn.btn-primary{:onclick => "submit_dialog_form(this)", :disable_with => "正在处理...."} 保存修改
