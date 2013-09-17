@@ -7,12 +7,16 @@
       %a.btn.btn-primary{'data-toggle' => "modal", href: "#myModal"} 导入终端交易数据
   - else
     = search_form_for @q ,html: {class: "form-inline"} do |f|
-      = link_to '导入数据', trades_path(op: 'import'), class: "btn btn-default"
       .form-group
         = f.text_field :trade_date_eq, placeholder: "日期", class: "form-control"
       .form-group
         = f.text_field :merchant_number_cont, placeholder: "商户编号", class: "form-control"
-      = f.submit 'Search', class: "btn btn-primary"
+      .form-group
+        = f.text_field :merchant_name_cont, placeholder: "商户名称", class: "form-control"
+      .form-group
+        = f.text_field :terminal_number_cont, placeholder: "终端号", class: "form-control"
+      = f.submit '查找', class: "btn btn-primary"
+      = link_to '导入数据', trades_path(op: 'import'), class: "btn btn-default"
 
 
 
@@ -32,11 +36,11 @@
     %tr.success
       %td{colspan:'4'} 合计
       %td= @collection.sum(:biz_count)
-      %td= '%.2f' % @collection.sum(:amount)
-      %td= '%.2f' % @collection.sum(:commission)
-      %td= '%.2f' % @collection.sum(:actual_amount)
-      %td= '%.2f' % @collection.sum(:base_commission)
-      %td= '%.2f' % @collection.sum(:profit)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:actual_amount)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:base_commission)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:profit)
 
     - @collection.each do |trade|
       %tr
@@ -45,11 +49,11 @@
         %td= trade.merchant_name
         %td= trade.terminal_number
         %td= trade.biz_count
-        %td= '%.2f' % trade.amount
-        %td= '%.2f' % trade.commission
-        %td= '%.2f' % trade.actual_amount
-        %td= '%.2f' % trade.base_commission
-        %td= '%.2f' % trade.profit
+        %td.num= number_with_delimiter '%.2f' % trade.amount
+        %td.num= number_with_delimiter '%.2f' % trade.commission
+        %td.num= number_with_delimiter '%.2f' % trade.actual_amount
+        %td.num= number_with_delimiter '%.2f' % trade.base_commission
+        %td.num= number_with_delimiter '%.2f' % trade.profit
   = will_paginate @collection
   %br
   
@@ -67,6 +71,5 @@
               = text_area_tag 'import_text', '', class: 'form-control', placeholder: '复制粘贴交易数据到这里'
             = submit_tag 
         .modal-footer
-          %button.btn.btn-default{type: "button", 'data-dismiss' => "modal"} Close
-          %button.btn.btn-primary{type: "button"} Save changes
-
+          %button.btn.btn-default{type: "button", 'data-dismiss' => "modal"} 放弃修改
+          %button.btn.btn-primary{:onclick => "submit_dialog_form(this)", :disable_with => "正在处理...."} 保存修改

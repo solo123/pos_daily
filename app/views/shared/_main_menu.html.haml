@@ -9,9 +9,10 @@
       %a.navbar-brand{:href => "/"} POS 交易统计系统
     .navbar-collapse.collapse
       %ul.nav.navbar-nav
-        %li= link_to '我的数据', my_trades_path
-        %li= link_to '交易数据', trades_path
-        %li= link_to '用户列表', users_path
+        %li{class: (controller?('my_trades') ? 'active' : '')}= link_to '我的数据', my_trades_path
+        - if current_user && current_user.roles.index('admin')
+          %li{class: (controller?('trades') ? 'active' : '')}= link_to '交易数据', trades_path
+          %li{class: (controller?('users') ? 'active' : '')}= link_to '用户列表', users_path
       %ul.nav.navbar-nav.navbar-right
         - if current_user
           %li 

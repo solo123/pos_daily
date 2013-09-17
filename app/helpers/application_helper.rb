@@ -17,4 +17,12 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
+
+	def controller?(*controller)
+    controller.include?(params[:controller])
+  end
+
+  def action?(*action)
+    action.include?(params[:action])
+  end
 end

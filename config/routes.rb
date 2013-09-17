@@ -5,7 +5,7 @@ PosDaily::Application.routes.draw do
   resources :my_trades
 
   devise_for :users
-	root :to => 'home#index'
+	root :to => 'my_trades#index'
   resources :users do
     post :add, :on => :collection
     patch :del_merchant, :on => :member

@@ -2,10 +2,8 @@
   - if @month_collection
     = form_tag(my_trades_path, method: :get, class: "form-inline") do
       .form-group
-        = text_field_tag :trade_date, params[:trade_date], class: "form-control"
-      .form-group
-        = collection_select  nil, :trade_month, @month_collection, :td, :td, class: "form-control"
-      = submit_tag 'Search', class: "btn btn-primary"
+        = collection_select  nil, :trade_month, @month_collection, :td, :td, {selected: params[:trade_month]}, class: "form-control", :onchange => "this.form.submit()"
+      =# submit_tag 'Search', class: "btn btn-primary"
 
   %table.table.table-bordered.table-striped.table-hover
     %tr
@@ -23,11 +21,11 @@
     %tr.success
       %td{colspan:'4'} 合计
       %td= @collection.sum(:biz_count)
-      %td= '%.2f' % @collection.sum(:amount)
-      %td= '%.2f' % @collection.sum(:commission)
-      %td= '%.2f' % @collection.sum(:actual_amount)
-      %td= '%.2f' % @collection.sum(:base_commission)
-      %td= '%.2f' % @collection.sum(:profit)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:actual_amount)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:base_commission)
+      %td.num= number_with_delimiter '%.2f' % @collection.sum(:profit)
 
     - @collection.each do |trade|
       %tr
@@ -36,9 +34,9 @@
         %td= trade.merchant_name
         %td= trade.terminal_number
         %td= trade.biz_count
-        %td= '%.2f' % trade.amount
-        %td= '%.2f' % trade.commission
-        %td= '%.2f' % trade.actual_amount
-        %td= '%.2f' % trade.base_commission
-        %td= '%.2f' % trade.profit
+        %td.num= number_with_delimiter '%.2f' % trade.amount
+        %td.num= number_with_delimiter '%.2f' % trade.commission
+        %td.num= number_with_delimiter '%.2f' % trade.actual_amount
+        %td.num= number_with_delimiter '%.2f' % trade.base_commission
+        %td.num= number_with_delimiter '%.2f' % trade.profit
 
