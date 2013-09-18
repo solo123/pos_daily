@@ -3,7 +3,15 @@
     = form_tag(my_trades_path, method: :get, class: "form-inline") do
       .form-group
         = collection_select  nil, :trade_month, @month_collection, :td, :td, {selected: params[:trade_month]}, class: "form-control", :onchange => "this.form.submit()"
-      =# submit_tag 'Search', class: "btn btn-primary"
+
+  = search_form_for @q, url: my_trades_path, html: {class: "form-inline"} do |f|
+    .form-group
+      = f.text_field :merchant_number_cont, placeholder: "商户编号", class: "form-control"
+    .form-group
+      = f.text_field :merchant_name_cont, placeholder: "商户名称", class: "form-control"
+    .form-group
+      = f.text_field :terminal_number_cont, placeholder: "终端号", class: "form-control"
+    = f.submit '筛选', class: "btn btn-primary"
 
   %table.table.table-bordered.table-striped.table-hover
     %tr

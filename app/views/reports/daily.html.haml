@@ -1,0 +1,9 @@
+%table.table.table-bordered.table-striped
+  - @results.each do |r|
+    %tr
+      %td= r.trade_date
+      %td= r.biz_count
+      %td= r.amount
+      %td= r.profit
+
+

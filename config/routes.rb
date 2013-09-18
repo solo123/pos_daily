@@ -19,4 +19,10 @@ PosDaily::Application.routes.draw do
       get :submit
     end
   end
+	resources :reports do
+		collection do
+			get :monthly
+			get :daily
+		end
+	end
 end
