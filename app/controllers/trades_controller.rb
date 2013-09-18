@@ -5,8 +5,8 @@ class TradesController < ResourcesController
     lines = data.split(/\n/)
     imp_lines = 0
     lines.each do |line|
-      cs = line.split(/[\t\s]/)
-      if cs.length>10 && cs[5].to_i > 0
+      cs = line.split(/[\t]/)
+      if cs.length>10 && cs[5].to_i > 0 && cs[2] == '801075599990010'
         b = Trade.new
         b.trade_date = trade_date
         b.merchant_number = cs[0]
