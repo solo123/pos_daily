@@ -86,3 +86,11 @@ form.form-inline{ margin-bottom: 22px; }
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+
+/* Form style
+-------------------------------------------------- */
+/* search form */
+.form-inline .form-group .search-ipt-data,.form-inline .form-group .search-ipt-terminal{width:120px;}
+
+

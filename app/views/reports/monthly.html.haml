@@ -1,8 +1,19 @@
-%table.table.table-bordered.table-striped
-  - @results.each do |r|
-    %tr
-      %td= r.trade_date
-      %td= r.biz_count
-      %td= r.amount
-      %td= r.profit
+.container
+  .btn-group.btn-group-justified
+    = link_to '每月报表', monthly_reports_path, class: "btn btn-default active"
+    = link_to '每日报表', daily_reports_path, class: "btn btn-default"
 
+  %table.table.table-bordered.table-striped.table-hover
+    %thead
+      %tr
+        %th 交易日期
+        %th 交易笔数
+        %th 交易金额
+        %th 交易分润
+    %tbody
+    - @results.each do |r|
+      %tr
+        %td= r.trade_date
+        %td= r.biz_count
+        %td= r.amount
+        %td= r.profit
