@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130915153242) do
+ActiveRecord::Schema.define(version: 20131009033732) do
 
   create_table "merchants", force: true do |t|
     t.string   "merchant_number"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20130915153242) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "agent_id"
+    t.integer  "client_id"
   end
 
   create_table "trades", force: true do |t|
@@ -62,6 +64,7 @@ ActiveRecord::Schema.define(version: 20130915153242) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "agent_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

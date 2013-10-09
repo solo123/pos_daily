@@ -6,19 +6,28 @@
       = link_to '提交数据', submit_trades_path, confirm: '数据提交后将不能修改，并会被客户查询到。', remote: true, class: "btn btn-default"
       %a.btn.btn-primary{'data-toggle' => "modal", href: "#myModal"} 导入终端交易数据
   - else
-    = search_form_for @q ,html: {class: "form-inline"} do |f|
-      .form-group
-        = f.text_field :trade_date_eq, placeholder: "日期", class: "form-control"
-      .form-group
-        = f.text_field :merchant_number_cont, placeholder: "商户编号", class: "form-control"
-      .form-group
-        = f.text_field :merchant_name_cont, placeholder: "商户名称", class: "form-control"
-      .form-group
-        = f.text_field :terminal_number_cont, placeholder: "终端号", class: "form-control"
-      .form-group
-        = f.text_field :biz_count_gteq, placeholder: '交易笔数大于', class: 'form-control'
-      = f.submit '查找', class: "btn btn-primary"
-      = link_to '导入数据', trades_path(op: 'import'), class: "btn btn-default"
+    = search_form_for @q ,html: {class: "form-inline", role: 'form'} do |f|
+      .col-md-12
+        .form-group
+          = f.label :trade_date_gteq, '开始日期'
+          = f.text_field :trade_date_gteq, placeholder: "开始日期", class: "form-control"
+        .form-group
+          = f.label :trade_date_lteq, '结束日期'
+          = f.text_field :trade_date_lteq, placeholder: '结束日期', class: 'form-control'
+        .form-group
+          = f.label :merchant_number_count, '商户编号'
+          = f.text_field :merchant_number_cont, placeholder: "商户编号", class: "form-control"
+        .form-group
+          = f.label :merchant_name_count, '商户名称'
+          = f.text_field :merchant_name_cont, placeholder: "商户名称", class: "form-control"
+        .form-group
+          = f.label :terminal_number_count, '终端号'
+          = f.text_field :terminal_number_cont, placeholder: "终端号", class: "form-control"
+        .form-group
+          = f.label :biz_count_gteq, '交易笔数大于'
+          = f.text_field :biz_count_gteq, placeholder: '交易笔数大于', class: 'form-control'
+        = f.submit '查找', class: "btn btn-primary"
+        = link_to '导入数据', trades_path(op: 'import'), class: "btn btn-default"
 
 
 
@@ -37,12 +46,12 @@
       %th 利润
     %tr.success
       %td{colspan:'4'} 合计
-      %td= @collection.sum(:biz_count)
-      %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
-      %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
-      %td.num= number_with_delimiter '%.2f' % @collection.sum(:actual_amount)
-      %td.num= number_with_delimiter '%.2f' % @collection.sum(:base_commission)
-      %td.num= number_with_delimiter '%.2f' % @collection.sum(:profit)
+      %td= @sum[:biz_count]
+      %td.num= number_with_delimiter '%.2f' % @sum[:amount]
+      %td.num= number_with_delimiter '%.2f' % @sum[:commission]
+      %td.num= number_with_delimiter '%.2f' % @sum[:actual_amount]
+      %td.num= number_with_delimiter '%.2f' % @sum[:base_commission]
+      %td.num= number_with_delimiter '%.2f' % @sum[:profit]
 
     - @collection.each do |trade|
       %tr
@@ -56,6 +65,15 @@
         %td.num= number_with_delimiter '%.2f' % trade.actual_amount
         %td.num= number_with_delimiter '%.2f' % trade.base_commission
         %td.num= number_with_delimiter '%.2f' % trade.profit
+
+    %tr.success
+      %td{colspan:'4'} 合计
+      %td= @sum[:biz_count]
+      %td.num= number_with_delimiter '%.2f' % @sum[:amount]
+      %td.num= number_with_delimiter '%.2f' % @sum[:commission]
+      %td.num= number_with_delimiter '%.2f' % @sum[:actual_amount]
+      %td.num= number_with_delimiter '%.2f' % @sum[:base_commission]
+      %td.num= number_with_delimiter '%.2f' % @sum[:profit]
   = will_paginate @collection
   %br
   

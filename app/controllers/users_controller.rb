@@ -1,4 +1,8 @@
 class UsersController < ResourcesController
+	before_filter do 
+    redirect_to :new_user_session_path unless current_user && current_user.admin?
+  end
+
   def add
     params.permit!
     @object = User.new(params[:user])
@@ -21,5 +25,9 @@ class UsersController < ResourcesController
     m.user = nil
     m.save
   end
+	def mock
+		session[:mock_user] = params[:id]
+		redirect_to :controller => :my_trades, :action => :index
+	end
 end
 

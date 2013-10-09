@@ -2,7 +2,7 @@ PosDaily::Application.routes.draw do
   resources :merchants
 
   resources :ttts
-  resources :my_trades
+  resources :my_trades, :clients
 
   devise_for :users
 	root :to => 'my_trades#index'
@@ -10,7 +10,7 @@ PosDaily::Application.routes.draw do
     post :add, :on => :collection
     patch :del_merchant, :on => :member
     patch :add_merchant, :on => :member
-
+		get :mock, :on => :member
   end
   resources :trades do
     collection do

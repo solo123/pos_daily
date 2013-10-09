@@ -1,4 +1,7 @@
 class TradesController < ResourcesController
+	before_filter do 
+    redirect_to :new_user_session_path unless current_user && current_user.admin?
+  end
   def import
     trade_date = params[:trade_date]
     data = params[:import_text]
@@ -23,7 +26,6 @@ class TradesController < ResourcesController
         b.status = 0
         imp_lines += 1
         b.save
-
       end
     end
     flash[:notice] = "导入#{imp_lines}行数据。"
@@ -51,6 +53,7 @@ class TradesController < ResourcesController
       end
       pages = 20
       @collection = @q.result.paginate(:page => params[:page], :per_page => pages)
+			@sum ||= @q.result.select('sum(biz_count) biz_count, sum(amount) amount, sum(commission) commission, sum(actual_amount) actual_amount, sum(base_commission) base_commission, sum(profit) profit').first
     end 
 
   private
