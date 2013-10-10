@@ -11,7 +11,9 @@
 
 @media (min-width: 992px) {
   .container {
-    max-width: 970px;
+    max-width: 100%;
+    padding-left:15px;
+    padding-right:15px;
   }
 }
 @media (min-width: 1200px) {

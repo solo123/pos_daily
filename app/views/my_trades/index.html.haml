@@ -58,29 +58,26 @@
             %span.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
 
     %table.table.table-bordered.table-striped.table-hover
-      %tr
-        %th 交易日期
-        %th 商户名称(商户号)终端号
-        %th 交易笔数
-        %th 交易金额(交易手续费)
       - @collection.each do |trade|
         %tr
           %td
-            交易日期
-            %br
             = trade.trade_date
           %td
             = trade.merchant_name
             %br 
-            (
+            %small.text-muted 商户号:
             = trade.merchant_number
-            )
             %br
+            %small.text-muted 终端号
             = trade.terminal_number
-          %td= trade.biz_count
+          %td
+            %small.text-muted 笔数
+            = trade.biz_count
           %td.num
+            %small.text-muted 金额
             = number_with_delimiter '%.2f' % trade.amount
             %br
-            %strong
+            %small 手续费
+            %strong.text-danger
               = number_with_delimiter '%.2f' % trade.commission
 
