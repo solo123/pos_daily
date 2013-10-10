@@ -1,7 +1,11 @@
 class AddAgentToMerchants < ActiveRecord::Migration
   def change
-		add_column :merchants, :agent_id, :integer
-		add_column :merchants, :client_id, :integer
-		add_column :users, :agent_id, :integer
+		change_table :merchants do |t|
+			t.rename :user_id, :agent_id
+			t.integer :client_id
+		end
+		change_table :users do |t|
+			t.integer :agent_id
+		end
   end
 end

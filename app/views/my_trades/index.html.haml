@@ -24,18 +24,12 @@
         %th 交易笔数
         %th 交易金额
         %th 交易手续费
-        %th 实收金额
-        %th 基准手续费
-        %th 利润
 
       %tr.success
         %td{colspan:'4'} 合计
         %td= @collection.sum(:biz_count)
         %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
         %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:actual_amount)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:base_commission)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:profit)
 
       - @collection.each do |trade|
         %tr
@@ -46,10 +40,7 @@
           %td= trade.biz_count
           %td.num= number_with_delimiter '%.2f' % trade.amount
           %td.num= number_with_delimiter '%.2f' % trade.commission
-          %td.num= number_with_delimiter '%.2f' % trade.actual_amount
-          %td.num= number_with_delimiter '%.2f' % trade.base_commission
-          %td.num= number_with_delimiter '%.2f' % trade.profit
-
+          
   %section.r-lessthan-800
     %table.table.table-bordered.table-striped.table-hover
       %tr
@@ -60,21 +51,12 @@
         %th 交易笔数
         %th 交易金额
         %th 交易手续费
-        %th 实收金额
-        %th 基准手续费
-        %th 利润
 
       %tr.success
-        %td{colspan:'4'} 合计:
-        %td
-          %p= @collection.sum(:biz_count)
-          %p 
-            %span 交易笔数
-            %span= number_with_delimiter '%.2f' % @collection.sum(:amount)
-          = number_with_delimiter '%.2f' % @collection.sum(:commission)
-          = number_with_delimiter '%.2f' % @collection.sum(:actual_amount)
-          = number_with_delimiter '%.2f' % @collection.sum(:base_commission)
-          = number_with_delimiter '%.2f' % @collection.sum(:profit)
+        %td{colspan:'4'} 合计
+        %td= @collection.sum(:biz_count)
+        %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
+        %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
 
       - @collection.each do |trade|
         %tr
@@ -85,7 +67,4 @@
           %td= trade.biz_count
           %td.num= number_with_delimiter '%.2f' % trade.amount
           %td.num= number_with_delimiter '%.2f' % trade.commission
-          %td.num= number_with_delimiter '%.2f' % trade.actual_amount
-          %td.num= number_with_delimiter '%.2f' % trade.base_commission
-          %td.num= number_with_delimiter '%.2f' % trade.profit
 

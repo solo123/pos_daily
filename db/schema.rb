@@ -16,11 +16,10 @@ ActiveRecord::Schema.define(version: 20131009033732) do
   create_table "merchants", force: true do |t|
     t.string   "merchant_number"
     t.string   "merchant_name"
-    t.integer  "user_id"
+    t.integer  "agent_id"
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "agent_id"
     t.integer  "client_id"
   end
 

@@ -13,7 +13,7 @@ class MyTradesController < ApplicationController
   		u = current_user
 		end
 		mer_numbers = []
-  	mer_numbers =  u.merchants.map{|m| m.merchant_number} if u
+  	mer_numbers =  u.agent_merchants.map{|m| m.merchant_number} if u
     @collection = @q.result.where(trade_date: dt..dt_e).where(merchant_number: mer_numbers).order('trade_date desc, id desc')
     @month_collection = Trade.order('trade_date desc, merchant_number').where(merchant_number: mer_numbers).select('substr(trade_date, 1, 7) td').distinct
   end

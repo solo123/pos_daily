@@ -1,7 +1,5 @@
-.container
-  %h1 Editing Object
-  = render 'form'
-  = link_to 'Show', @object
-  |
-  = link_to 'Back', @object
+.btn-group
+  = link_to t(:back), @object, class: 'btn btn-default'
+  = link_to t(:show), @object, class: 'btn btn-default'
 
+= render 'form'
