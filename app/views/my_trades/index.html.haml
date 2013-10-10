@@ -60,7 +60,7 @@
     %table.table.table-bordered.table-striped.table-hover
       %tr
         %th 交易日期
-        %th ()
+        %th 商户名称(商户号)终端号
         %th 交易笔数
         %th 交易金额(交易手续费)
       - @collection.each do |trade|
@@ -70,13 +70,12 @@
             %br
             = trade.trade_date
           %td
-            商户名称: 
             = trade.merchant_name
             %br 
-            商户号:
+            (
             = trade.merchant_number
+            )
             %br
-            终端号
             = trade.terminal_number
           %td= trade.biz_count
           %td.num
