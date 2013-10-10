@@ -40,31 +40,48 @@
           %td= trade.biz_count
           %td.num= number_with_delimiter '%.2f' % trade.amount
           %td.num= number_with_delimiter '%.2f' % trade.commission
-          
+
   %section.r-lessthan-800
+    .panel.panel-success
+      .panel-heading 
+        %h3.panel-title 合计
+      .panel-body
+        %ul
+          %li 
+            交易笔数：
+            = @collection.sum(:biz_count)
+          %li 
+            交易金额：
+            %span.num= number_with_delimiter '%.2f' % @collection.sum(:amount) 
+          %li 
+            交易手续费：
+            %span.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
+
     %table.table.table-bordered.table-striped.table-hover
       %tr
         %th 交易日期
-        %th 商户号 
-        %th 商户名称
-        %th 终端号
+        %th ()
         %th 交易笔数
-        %th 交易金额
-        %th 交易手续费
-
-      %tr.success
-        %td{colspan:'4'} 合计
-        %td= @collection.sum(:biz_count)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
-
+        %th 交易金额(交易手续费)
       - @collection.each do |trade|
         %tr
-          %td= trade.trade_date
-          %td= trade.merchant_number
-          %td= trade.merchant_name
-          %td= trade.terminal_number
+          %td
+            交易日期
+            %br
+            = trade.trade_date
+          %td
+            商户名称: 
+            = trade.merchant_name
+            %br 
+            商户号:
+            = trade.merchant_number
+            %br
+            终端号
+            = trade.terminal_number
           %td= trade.biz_count
-          %td.num= number_with_delimiter '%.2f' % trade.amount
-          %td.num= number_with_delimiter '%.2f' % trade.commission
+          %td.num
+            = number_with_delimiter '%.2f' % trade.amount
+            %br
+            %strong
+              = number_with_delimiter '%.2f' % trade.commission
 
