@@ -55,30 +55,3 @@
             %td.num= number_with_delimiter '%.2f' % trade.base_commission
             %td.num= number_with_delimiter '%.2f' % trade.profit
           
-  %section.r-lessthan-800
-    %table.table.table-bordered.table-striped.table-hover
-      %tr
-        %th 交易日期
-        %th 商户号 
-        %th 商户名称
-        %th 终端号
-        %th 交易笔数
-        %th 交易金额
-        %th 交易手续费
-
-      %tr.success
-        %td{colspan:'4'} 合计
-        %td= @collection.sum(:biz_count)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:amount)
-        %td.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
-
-      - @collection.each do |trade|
-        %tr
-          %td= trade.trade_date
-          %td= trade.merchant_number
-          %td= trade.merchant_name
-          %td= trade.terminal_number
-          %td= trade.biz_count
-          %td.num= number_with_delimiter '%.2f' % trade.amount
-          %td.num= number_with_delimiter '%.2f' % trade.commission
-
