@@ -10,7 +10,7 @@
     .well
       %h4 未关联的商户
       %ul
-        - user.agent_merchants.free_client_merchants.each do |m|
+        - user.agent.agent_merchants.free_client_merchants.each do |m|
           %li
             = link_to "#{m.merchant_number} #{m.merchant_name}", add_merchant_client_path(user, merchant_id: m.id), remote: true, method: :patch
 

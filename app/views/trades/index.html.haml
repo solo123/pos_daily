@@ -9,10 +9,10 @@
     = search_form_for @q ,html: {class: "form-inline", role: 'form'} do |f|
       .form-group
         = f.label :trade_date_gteq, '开始日期', class: "sr-only"
-        = f.text_field :trade_date_gteq, placeholder: "开始日期", class: "form-control search-ipt-terminal"
+        = f.text_field :trade_date_gteq, placeholder: "开始日期", class: "form-control search-ipt-terminal date-picker"
       .form-group
         = f.label :trade_date_lteq, '结束日期', class: "sr-only"
-        = f.text_field :trade_date_lteq, placeholder: '结束日期', class: 'form-control search-ipt-terminal'
+        = f.text_field :trade_date_lteq, placeholder: '结束日期', class: 'form-control search-ipt-terminal date-picker'
       .form-group
         = f.label :merchant_number_cont, '商户编号', class: "sr-only"
         = f.text_field :merchant_number_cont, placeholder: "商户编号", class: "form-control"
