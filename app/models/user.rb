@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
 	def admin?
 		self.roles && self.roles.index('admin')
 	end
+	def agent?
+		self.roles && self.roles.index('agent')
+	end
 end

@@ -39,12 +39,12 @@ class ClientsController < ApplicationController
 	end
   def add_merchant
     @object = User.find(params[:id])
-    @object.merchants << Merchant.find(params[:merchant_id])
+    @object.client_merchants << Merchant.find(params[:merchant_id])
   end
   def del_merchant
     @object = User.find(params[:id])
     m = Merchant.find(params[:merchant_id])
-    m.user = nil
+    m.client = nil
     m.save
   end
 

@@ -1,9 +1,5 @@
 class MyTradesController < ApplicationController
   def index
-    dt = Date.today.at_beginning_of_month
-    dt = "#{params[:trade_month]}-01".to_date if params[:trade_month]
-    dt_e = dt.next_month - 1
-
 		params[:q] ||= {}
 		@q = Trade.search(params[:q])
 		u = nil
@@ -13,9 +9,14 @@ class MyTradesController < ApplicationController
   		u = current_user
 		end
 		mer_numbers = []
-  	mer_numbers =  u.agent_merchants.map{|m| m.merchant_number} if u
-    @collection = @q.result.where(trade_date: dt..dt_e).where(merchant_number: mer_numbers).order('trade_date desc, id desc')
-    @month_collection = Trade.order('trade_date desc, merchant_number').where(merchant_number: mer_numbers).select('substr(trade_date, 1, 7) td').distinct
+		if u && u.agent?
+			mer_numbers =  u.agent_merchants.map{|m| m.merchant_number}
+    else
+			mer_numbers = u.client_merchants.map{|m| m.merchant_number}
+		end
+		@data_user = u
+	  @collection = @q.result.where(merchant_number: mer_numbers).order('trade_date desc, id desc')
+		@sum ||= @q.result.where(merchant_number: mer_numbers).select('sum(biz_count) biz_count, sum(amount) amount, sum(commission) commission, sum(actual_amount) actual_amount, sum(base_commission) base_commission, sum(profit) profit').first
   end
 end
 

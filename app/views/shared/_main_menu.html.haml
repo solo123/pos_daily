@@ -11,7 +11,7 @@
       %ul.nav.navbar-nav
         %li{class: (controller?('my_trades') ? 'active' : '')}= link_to '我的数据', my_trades_path
         %li{class: (controller?('clients') ? 'active' : '')}= link_to '我的客户', clients_path
-        - if current_user && current_user.roles.index('admin')
+        - if current_user && current_user.admin?
           %li{class: (controller?('trades') ? 'active' : '')}= link_to '交易数据', trades_path
           %li{class: (controller?('reports') ? 'active' : '')}= link_to '统计报表', reports_path
           %li{class: (controller?('users') ? 'active' : '')}= link_to '用户列表', users_path
