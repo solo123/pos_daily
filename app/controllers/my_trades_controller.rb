@@ -12,7 +12,7 @@ class MyTradesController < ApplicationController
 		if u && u.agent?
 			mer_numbers =  u.agent_merchants.map{|m| m.merchant_number}
     else
-			mer_numbers = u.client_merchants.map{|m| m.merchant_number}
+			mer_numbers = u.client_merchants.map{|m| m.merchant_number} if u
 		end
 		@data_user = u
 	  @collection = @q.result.where(merchant_number: mer_numbers).order('trade_date desc, id desc')
