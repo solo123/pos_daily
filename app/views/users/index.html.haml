@@ -1,6 +1,6 @@
 .container
-  = link_to '新用户', new_user_path
-
+  %p
+    = link_to '新用户', new_user_path, class: "btn btn-default"
   = will_paginate @collection
   %table.table.table-bordered.table-striped.table-hover
     %tr

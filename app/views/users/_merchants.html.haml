@@ -1,13 +1,13 @@
-.container#merchants
-  .well
-    %ul
+.row#merchants
+  .col-md-6
+    .list-group
+      .list-group-item.active 已选择
       - user.merchants.each do |m|
-        %li
-          = link_to "#{m.merchant_number} #{m.merchant_name}", del_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
+        = link_to "#{m.merchant_number} #{m.merchant_name}", del_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch, class: "list-group-item"
 
-  .well
-    %ul
+  .col-md-6
+    .list-group
+      .list-group-item.active 未选择
       - Merchant.free_merchants.each do |m|
-        %li
-          = link_to "#{m.merchant_number} #{m.merchant_name}", add_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
+        = link_to "#{m.merchant_number} #{m.merchant_name}", add_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch, class: "list-group-item"
 

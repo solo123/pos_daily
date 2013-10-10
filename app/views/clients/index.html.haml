@@ -1,7 +1,9 @@
-= render 'admin_mock'
 
 .container
-  = link_to '新用户', new_client_path
+  = render 'admin_mock'
+  %p
+    = link_to '新用户', new_client_path, class: "btn btn-default"
+
 
   %table.table.table-bordered.table-striped.table-hover
     %tr
