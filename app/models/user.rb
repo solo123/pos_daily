@@ -3,8 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :merchants
-	has_many :clients, :foreign_key => 'agent_id', :class_name => 'User'
+  has_many :agent_merchants, foreign_key: 'agent_id', class_name: 'Merchant'
+	has_many :client_merchants, :foreign_key => 'client_id', :class_name => 'Merchant'
+	has_many :clients, foreign_key: 'agent_id', class_name: 'User'
 	belongs_to :agent, :class_name => 'User'
 
 	def admin?

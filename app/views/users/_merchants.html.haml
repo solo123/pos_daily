@@ -1,13 +1,16 @@
-.container#merchants
-  .well
-    %ul
-      - user.merchants.each do |m|
-        %li
-          = link_to "#{m.merchant_number} #{m.merchant_name}", del_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
-
-  .well
-    %ul
-      - Merchant.free_merchants.each do |m|
-        %li
-          = link_to "#{m.merchant_number} #{m.merchant_name}", add_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
+.row#merchants
+  .col-md-6
+    .well
+      %h4 相关商户
+      %ul
+        - user.agent_merchants.each do |m|
+          %li
+            = link_to "#{m.merchant_number} #{m.merchant_name}", del_agent_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
+  .col-md-6
+    .well
+      %h4 未关联的商户
+      %ul
+        - Merchant.free_merchants.each do |m|
+          %li
+            = link_to "#{m.merchant_number} #{m.merchant_name}", add_agent_merchant_user_path(user, merchant_id: m.id), remote: true, method: :patch
 

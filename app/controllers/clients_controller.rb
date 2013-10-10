@@ -24,6 +24,9 @@ class ClientsController < ApplicationController
 		end
 		render action: :new
 	end
+	def edit
+		@object = User.find(params[:id])
+	end
 	def update
 		@object = User.find(params[:id])
 		params.permit!
@@ -34,6 +37,16 @@ class ClientsController < ApplicationController
 			flash[:error] = @object.errors.full_messages.to_sentence
 		end
 	end
+  def add_merchant
+    @object = User.find(params[:id])
+    @object.merchants << Merchant.find(params[:merchant_id])
+  end
+  def del_merchant
+    @object = User.find(params[:id])
+    m = Merchant.find(params[:merchant_id])
+    m.user = nil
+    m.save
+  end
 
   private
     def client_params

@@ -1,6 +1,6 @@
 = render 'admin_mock'
-%h1 New object
 = link_to '返回列表', clients_path
+
 .well
   = simple_form_for @object, :url => clients_path, :html => {:class => 'well form-horizontal'}  do |f|
     = f.error_notification

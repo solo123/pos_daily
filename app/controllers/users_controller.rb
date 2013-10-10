@@ -15,14 +15,14 @@ class UsersController < ResourcesController
     end
     render :new
   end
-  def add_merchant
+  def add_agent_merchant
     @object = User.find(params[:id])
-    @object.merchants << Merchant.find(params[:merchant_id])
+    @object.agent_merchants << Merchant.find(params[:merchant_id])
   end
-  def del_merchant
+  def del_agent_merchant
     @object = User.find(params[:id])
     m = Merchant.find(params[:merchant_id])
-    m.user = nil
+    m.agent = nil
     m.save
   end
 	def mock
