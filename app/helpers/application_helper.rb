@@ -25,4 +25,12 @@ module ApplicationHelper
   def action?(*action)
     action.include?(params[:action])
   end
+
+	def format_dec(val)
+		if val
+			number_with_delimiter('%.2f' % val)
+		else
+			''
+		end
+	end
 end

@@ -1,6 +1,6 @@
 PosDaily::Application.routes.draw do
+  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
   devise_for :users
-	root :to => 'my_trades#index'
 
   resources :merchants
   resources :ttts
@@ -31,4 +31,7 @@ PosDaily::Application.routes.draw do
 			get :daily
 		end
 	end
+
+  # Make sure this routeset is defined last
+  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
 end
