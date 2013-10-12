@@ -6,7 +6,7 @@ module ApplicationHelper
       next if message.blank?
 
       type = :success if type == :notice
-      type = :error   if type == :alert
+      type = :warning   if type == :alert
       next unless ALERT_TYPES.include?(type)
 
       Array(message).each do |msg|
