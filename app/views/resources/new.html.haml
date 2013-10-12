@@ -1,5 +1,4 @@
-.container
-  %h1 New object
-  = link_to '返回列表', send("#{@object.class.name.underscore.split('/').last.pluralize}_path")
-  = render 'form'
+%h1 New object
+= link_to '返回列表', send("#{@object.class.name.underscore.split('/').last.pluralize}_path")
+= render 'form'
 

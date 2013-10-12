@@ -6,15 +6,15 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => "/"} POS 交易统计系统
+      %a.navbar-brand{:href => "/"} POS渠道系统
     .navbar-collapse.collapse
       %ul.nav.navbar-nav
-        %li{class: (controller?('my_trades') ? 'active' : '')}= link_to '我的数据', my_trades_path
-        %li{class: (controller?('clients') ? 'active' : '')}= link_to '我的客户', clients_path
+        %li{class: (controller?('my_trades') ? 'active' : '')}= link_to '商户数据', my_trades_path
+        %li{class: (controller?('clients') ? 'active' : '')}= link_to '我的代理商', clients_path
         - if current_user && current_user.admin?
           %li{class: (controller?('trades') ? 'active' : '')}= link_to '交易数据', trades_path
           %li{class: (controller?('reports') ? 'active' : '')}= link_to '统计报表', reports_path
-          %li{class: (controller?('users') ? 'active' : '')}= link_to '用户列表', users_path
+          %li{class: (controller?('users') ? 'active' : '')}= link_to '用户管理', users_path
         - if current_user && current_user.agent?
           %li 
             %a{href: '/notify'} 公告
