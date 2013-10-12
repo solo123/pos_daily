@@ -15,6 +15,12 @@
           %li{class: (controller?('trades') ? 'active' : '')}= link_to '交易数据', trades_path
           %li{class: (controller?('reports') ? 'active' : '')}= link_to '统计报表', reports_path
           %li{class: (controller?('users') ? 'active' : '')}= link_to '用户列表', users_path
+        - if current_user && current_user.agent?
+          %li 
+            %a{href: '/notify'} 公告
+          %li
+            %a{href: 'http://pan.baidu.com/s/1Fut9B', target: '_blank'} 渠道资料下载（提取码: orrk）
+
       %ul.nav.navbar-nav.navbar-right
         - if current_user
           %li 
