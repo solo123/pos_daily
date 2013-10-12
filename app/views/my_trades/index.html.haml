@@ -38,12 +38,12 @@
       %tr.success
         %td{colspan:'4'} 合计
         %td= @sum[:biz_count]
-        %td.num= number_with_delimiter '%.2f' % @sum[:amount] if @sum[:amount]
-        %td.num= number_with_delimiter '%.2f' % @sum[:commission] if @sum[:commission]
+        %td.num= format_dec @sum[:amount]
+        %td.num= format_dec @sum[:commission]
         - if @data_user && @data_user.agent?
-          %td.num= number_with_delimiter '%.2f' % @sum[:actual_amount]
-          %td.num= number_with_delimiter '%.2f' % @sum[:base_commission]
-          %td.num= number_with_delimiter '%.2f' % @sum[:profit]
+          %td.num= format_dec @sum[:actual_amount]
+          %td.num= format_dec @sum[:base_commission]
+          %td.num= format_dec @sum[:profit]
 
       - @collection.each do |trade|
         %tr
@@ -52,12 +52,12 @@
           %td= trade.merchant_name
           %td= trade.terminal_number
           %td= trade.biz_count
-          %td.num= number_with_delimiter '%.2f' % trade.amount
-          %td.num= number_with_delimiter '%.2f' % trade.commission
+          %td.num= format_dec trade.amount
+          %td.num= format_dec trade.commission
           - if @data_user && @data_user.agent?
-            %td.num= number_with_delimiter '%.2f' % trade.actual_amount
-            %td.num= number_with_delimiter '%.2f' % trade.base_commission
-            %td.num= number_with_delimiter '%.2f' % trade.profit
+            %td.num= format_dec trade.actual_amount
+            %td.num= format_dec trade.base_commission
+            %td.num= format_dec trade.profit
           
   %section.r-lessthan-800
     .panel.panel-success
@@ -70,10 +70,10 @@
             = @collection.sum(:biz_count)
           %li 
             交易金额：
-            %span.num= number_with_delimiter '%.2f' % @collection.sum(:amount) 
+            %span.num= format_dec @collection.sum(:amount) 
           %li 
             交易手续费：
-            %span.num= number_with_delimiter '%.2f' % @collection.sum(:commission)
+            %span.num= format_dec @collection.sum(:commission)
 
       %table.table.table-bordered.table-striped.table-hover
         - @collection.each do |trade|
@@ -93,8 +93,8 @@
               = trade.biz_count
             %td.num
               %small.text-muted 金额
-              = number_with_delimiter '%.2f' % trade.amount
+              = format_dec trade.amount
               %br
               %small.text-muted 手续费
               %strong.text-danger
-                = number_with_delimiter '%.2f' % trade.commission
+                = format_dec trade.commission

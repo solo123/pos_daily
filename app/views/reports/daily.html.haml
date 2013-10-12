@@ -10,7 +10,7 @@
     %tr
       %td= r.trade_date
       %td= r.biz_count
-      %td.num= number_with_delimiter '%.2f' % r.amount
-      %td.num= number_with_delimiter '%.2f' % r.profit
+      %td.num= format_dec r.amount
+      %td.num= format_dec r.profit
 
 
