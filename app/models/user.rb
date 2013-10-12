@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 	has_many :clients, foreign_key: 'agent_id', class_name: 'User'
 	belongs_to :agent, :class_name => 'User'
 
+	scope :all_agents, -> { where('roles like "%agent%"') }
+
 	def admin?
 		self.roles && self.roles.index('admin')
 	end

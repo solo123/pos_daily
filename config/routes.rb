@@ -29,6 +29,8 @@ PosDaily::Application.routes.draw do
 		collection do
 			get :monthly
 			get :daily
+			get :agents
+			post :agents
 		end
 	end
 
