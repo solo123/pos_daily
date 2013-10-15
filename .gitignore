@@ -20,3 +20,4 @@
 /public/assets/
 /public/system/
 *.orig
+/db/cms_fixtures/pos-daily/
