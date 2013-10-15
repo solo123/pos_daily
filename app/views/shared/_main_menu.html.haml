@@ -10,7 +10,8 @@
     .navbar-collapse.collapse
       %ul.nav.navbar-nav
         %li{class: (controller?('my_trades') ? 'active' : '')}= link_to '商户数据', my_trades_path
-        %li{class: (controller?('clients') ? 'active' : '')}= link_to '我的代理商', clients_path
+        - if current_user && current_user.agent?
+          %li{class: (controller?('clients') ? 'active' : '')}= link_to '我的代理商', clients_path
         - if current_user && current_user.admin?
           %li{class: (controller?('trades') ? 'active' : '')}= link_to '交易数据', trades_path
           %li{class: (controller?('reports') ? 'active' : '')}= link_to '统计报表', reports_path
