@@ -29,8 +29,8 @@
       %th 交易笔数
       %th 交易金额
       %th 交易手续费
+      %th 实收金额
       - if @data_user && @data_user.agent?
-        %th 实收金额
         %th 基准手续费
         %th 利润
 
@@ -39,8 +39,8 @@
       %td= @sum[:biz_count]
       %td.num= format_dec @sum[:amount]
       %td.num= format_dec @sum[:commission]
+      %td.num= format_dec @sum[:actual_amount]
       - if @data_user && @data_user.agent?
-        %td.num= format_dec @sum[:actual_amount]
         %td.num= format_dec @sum[:base_commission]
         %td.num= format_dec @sum[:profit]
 
@@ -53,8 +53,8 @@
         %td= trade.biz_count
         %td.num= format_dec trade.amount
         %td.num= format_dec trade.commission
+        %td.num= format_dec trade.actual_amount
         - if @data_user && @data_user.agent?
-          %td.num= format_dec trade.actual_amount
           %td.num= format_dec trade.base_commission
           %td.num= format_dec trade.profit
         
