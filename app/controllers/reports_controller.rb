@@ -33,8 +33,8 @@ class ReportsController < ApplicationController
   	@end_date = Date.today.next_month.at_beginning_of_month - 1
 		@start_date = params[:start_date].to_date if params[:start_date]
 		@end_date = params[:end_date].to_date if params[:end_date]
-		@results = Trade.select("merchant_number, merchant_name,  sum(biz_count) biz_count, sum(amount) amount, sum(profit) profit")
-		  .where(status: 1).where(trade_date: @start_date..@end_date).group(:merchant_number).order('amount desc')
+		@results = Trade.select("merchant_number, merchant_name,  sum(biz_count) biz_count, sum(amount) amnt, sum(profit) profit")
+		  .where(status: 1).where(trade_date: @start_date..@end_date).group(:merchant_number).order('amnt desc')
 	end
 	def merchant
 		@start_date = params[:start_date].to_date

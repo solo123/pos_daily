@@ -33,7 +33,7 @@
       %td= link_to r.merchant_number, "/reports/merchant?merchant=#{r.merchant_number}&start_date=#{@start_date}&end_date=#{@end_date}", remote: true
       %td= r.merchant_name
       %td.num= format_dec r.biz_count
-      %td.num= format_dec r.amount
+      %td.num= format_dec r.amnt
       %td.num= format_dec r.profit
 
 
