@@ -29,8 +29,12 @@ PosDaily::Application.routes.draw do
 		collection do
 			get :monthly
 			get :daily
+			post :daily
 			get :agents
 			post :agents
+			get :merchants
+			post :merchants
+			get :merchant
 		end
 	end
 

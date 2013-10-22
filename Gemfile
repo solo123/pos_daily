@@ -53,3 +53,4 @@ gem 'best_in_place', :git => 'git://github.com/bernat/best_in_place.git', :branc
 gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form'
 gem 'comfortable_mexican_sofa'
+gem 'jquery-turbolinks'
