@@ -5,7 +5,7 @@
     $(function(){
       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         test = e.target // activated tab
-        var url = '/reports/' + $(e.target).data('report');
+        var url = '/reports/' + $(e.target).data('report') + '.js';
         $.get(url);
       });
     });
