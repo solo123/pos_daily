@@ -8,7 +8,7 @@
   %tbody
   - @results.each do |r|
     %tr
-      %td= r.trade_date
+      %td= r.trade_date.strftime('%Y-%m')
       %td= r.biz_count
       %td.num= format_dec r.amount
       %td.num= format_dec r.profit

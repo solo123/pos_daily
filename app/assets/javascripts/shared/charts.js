@@ -20,8 +20,10 @@ function show_diagram(canvas_id, data_id, label_index, data_index){
 
 	tt = data;
   var options = {
-		scaleOverlay : true,
-		scaleStartValue : 0
+	  scaleOverride : true,
+	  scaleSteps : 11,
+	  scaleStepWidth : parseFloat(Math.max.apply(Math, data_dt).toExponential(1)) / 10,
+    scaleStartValue : 0,
 	};
 
 	switch ($('#diagram_type').val()){
