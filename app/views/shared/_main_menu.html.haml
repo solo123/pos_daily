@@ -6,7 +6,9 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{:href => "/"} POS渠道系统
+      %a.navbar-brand{:href => "/"} 
+        = image_tag(("wooul-logo.png"), :alt => "Wooul渠道系统")
+        渠道系统
     .navbar-collapse.collapse
       %ul.nav.navbar-nav
         %li{class: (controller?('my_trades') ? 'active' : '')}= link_to '商户数据', my_trades_path
@@ -19,8 +21,6 @@
         - if current_user && current_user.agent?
           %li 
             %a{href: '/notify'} 公告
-          %li
-            %a{href: 'http://pan.baidu.com/s/1Fut9B', target: '_docs'} 渠道资料下载（提取码: orrk）
 
       %ul.nav.navbar-nav.navbar-right
         - if current_user
