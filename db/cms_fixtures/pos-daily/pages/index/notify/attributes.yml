@@ -1,5 +1,5 @@
 ---
-label: 公告
+label: "公告"
 layout: notify-list
 parent: index
 target_page: 

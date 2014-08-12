@@ -9,20 +9,20 @@ class TradesController < ResourcesController
     imp_lines = 0
     lines.each do |line|
       cs = line.split(/[\t]/)
-      if cs.length>10 && cs[5].to_i > 0 && cs[2] == '801075599990010'
+      if cs.length>8 && cs[1].start_with?('826')
         b = Trade.new
-        b.trade_date = trade_date
-        b.merchant_number = cs[0]
-        b.merchant_name = cs[1]
-        b.agent_number = cs[2]
-        b.agent_name = cs[3]
-        b.terminal_number = cs[4]
-        b.biz_count = cs[5].to_i
-        b.amount = cs[6].to_f
-        b.commission = cs[7].to_f
-        b.actual_amount = cs[8].to_f
-        b.base_commission = cs[9].to_f
-        b.profit = cs[10].to_f
+        b.trade_date = cs[0].to_date
+        b.merchant_number = cs[1].strip
+        b.merchant_name = cs[2]
+        b.agent_number = ''
+        b.agent_name = ''
+        b.terminal_number = cs[3]
+        b.biz_count = cs[4].to_i
+        b.amount = cs[5].to_f
+        b.commission = cs[6].to_f
+        b.actual_amount = b.amount - b.commission
+        b.base_commission = cs[7].to_f
+        b.profit = cs[8].to_f
         b.status = 0
         imp_lines += 1
         b.save

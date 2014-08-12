@@ -1,5 +1,6 @@
 PosDaily::Application.routes.draw do
-  ComfortableMexicanSofa::Routing.admin(:path => '/cms-admin')
+  comfy_route :cms_admin, :path => '/cms-admin'
+
   devise_for :users
 
   resources :merchants
@@ -39,5 +40,5 @@ PosDaily::Application.routes.draw do
 	end
 
   # Make sure this routeset is defined last
-  ComfortableMexicanSofa::Routing.content(:path => '/', :sitemap => false)
+  comfy_route :cms, :path => '/', :sitemap => false
 end

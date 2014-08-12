@@ -1,7 +1,7 @@
 source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.4'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -20,7 +20,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
+gem 'jquery-ui-rails', '~>4.2'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
@@ -50,7 +50,7 @@ gem 'ransack'
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
 gem 'best_in_place', :git => 'git://github.com/bernat/best_in_place.git', :branch => 'rails-4'
-gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
+gem 'rails4-autocomplete'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form'
 gem 'comfortable_mexican_sofa'
-gem 'jquery-turbolinks'
+# gem 'jquery-turbolinks'

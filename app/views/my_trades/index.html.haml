@@ -19,6 +19,7 @@
       = f.text_field :terminal_number_cont, placeholder: "终端号", class: "form-control"
     = f.submit '筛选', class: "btn btn-primary"
 %p
+= will_paginate @collection
 %section.r-morethan-800
   %table.table.table-bordered.table-striped.table-hover
     %tr
@@ -97,3 +98,4 @@
             %small.text-muted 手续费
             %strong.text-danger
               = format_dec trade.commission
+= will_paginate @collection
