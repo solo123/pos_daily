@@ -42,6 +42,13 @@ class TradesController < ResourcesController
     end
     Trade.where(status: 0).update_all(status: 1)
   end
+  def rm
+    dt = params[:dt].to_date
+    if dt
+      Trade.where(trade_date: dt).destroy_all
+    end
+    redirect_to trades_path('q[trade_date_gteq]' => dt, 'q[trade_date_lteq]' => dt)
+  end
 
   protected
     def load_collection

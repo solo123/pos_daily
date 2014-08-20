@@ -23,6 +23,7 @@ PosDaily::Application.routes.draw do
       post :import
       get :del
       get :submit
+      get :rm
     end
   end
 
