@@ -28,7 +28,7 @@
     = link_to '导入数据', trades_path(op: 'import'), class: "btn btn-default"
     - if params[:q][:trade_date_gteq] && params[:q][:trade_date_lteq] && params[:q][:trade_date_gteq] == params[:q][:trade_date_lteq]
       - dt = params[:q][:trade_date_gteq].to_date
-      = link_to '删除数据', rm_trades_path(dt: dt), class: 'btn btn-error', data: {confirm: "确认要删除 #{dt} 的数据吗？"}
+      = link_to '删除数据', rm_trades_path(dt: dt), class: 'btn btn-danger', data: {confirm: "确认要删除 #{dt} 的数据吗？"}
 
 
 
